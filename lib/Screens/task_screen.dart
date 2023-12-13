@@ -1,21 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:todo_list/Models/task.dart';
+import 'package:todo_list/Models/task_data.dart';
 import 'package:todo_list/Screens/add_task_screen.dart';
 import 'package:todo_list/widgets/task_list.dart';
+import 'package:provider/provider.dart';
 
-class TaskScreen extends StatefulWidget {
+class TaskScreen extends StatelessWidget {
   const TaskScreen({super.key});
-
-  @override
-  State<TaskScreen> createState() => _TaskScreenState();
-}
-
-class _TaskScreenState extends State<TaskScreen> {
-  List<Task> tasks =[
-  Task(name: 'go shopping'),
-  Task(name: 'buy a gift'),
-  Task(name: 'go to the gym'),
-];
 
   @override
   Widget build(BuildContext context) {
@@ -32,11 +22,11 @@ class _TaskScreenState extends State<TaskScreen> {
                 padding: EdgeInsets.only(
                   bottom: MediaQuery.of(context).viewInsets.bottom),
                 child:  AddTaskScreen((newTaskTitle){
-                  setState(() {
-                    tasks.add(Task(name: newTaskTitle));
-                    // to close keyboard after finishing typing
-                    Navigator.pop(context);
-                  });
+                  // setState(() {
+                  //   tasks.add(Task(name: newTaskTitle));
+                  //   // to close keyboard after finishing typing
+                  //   Navigator.pop(context);
+                  // });
                   
                 }),
                 ),
@@ -72,7 +62,7 @@ class _TaskScreenState extends State<TaskScreen> {
             ),
             const SizedBox(height: 25),
              Text(
-              '${tasks.length} Tasks',
+              '${Provider.of<TaskData>(context).tasks.length} Tasks',
               style: const TextStyle(
                 color: Colors.white,
                 fontSize: 18,
@@ -84,7 +74,7 @@ class _TaskScreenState extends State<TaskScreen> {
                 decoration: BoxDecoration(
                     color: Colors.white,
                     borderRadius: BorderRadius.circular(16)),
-                child: TaskList(tasks),
+                child: const TaskList(),
               ),
             ),
           ],
