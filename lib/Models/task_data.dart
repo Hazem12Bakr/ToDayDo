@@ -7,4 +7,16 @@ class TaskData extends ChangeNotifier{
   Task(name: 'buy a gift'),
   Task(name: 'go to the gym'),
 ];
+
+ void addTask(String newTaskTitle){
+  tasks.add(Task(name: newTaskTitle));
+  // to announce the lestining widgets 
+  notifyListeners();
+ }
+
+ void updateTask(Task task){
+  task.donechange();
+  notifyListeners();
+ }
+
 }
